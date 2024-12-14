@@ -5,6 +5,7 @@ import { DeliverViaWebhookTask } from "./deliver-via-webhook";
 import { ExtractTextFromElementTask } from "./extract-from-element";
 import { FillInputTask } from "./fill-input";
 import { LaunchBrowserTask } from "./launch-browser";
+import { LlmDataExtractionTask } from "./llm-data-extraction";
 import { PageToHTMLTask } from "./page-to-html";
 import { WaitForElementTask } from "./wait-for-element";
 
@@ -20,4 +21,5 @@ export const TaskRegistry: Registry = {
   CLICK_ELEMENT: ClickElementTask,
   WAIT_FOR_ELEMENT: WaitForElementTask,
   DELIVER_VIA_WEBHOOK: DeliverViaWebhookTask,
+  LLM_DATA_EXTRACTION: LlmDataExtractionTask,
 };

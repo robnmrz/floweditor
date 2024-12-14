@@ -6,6 +6,7 @@ import { DeliverViaWebhookExecutor } from "./deliver-via-webhook-executor";
 import { ExtractTextFromElementExecutor } from "./extract-text-from-element-executor";
 import { FillInputExecutor } from "./fill-input-executor";
 import { LaunchBrowserExecutor } from "./launch-browser-executor";
+import { LlmDataExtractionExecutor } from "./llm-data-extraction-executor";
 import { PageToHTMLExecutor } from "./page-to-html-executor";
 import { WaitForElementExecutor } from "./wait-for-element-executor";
 
@@ -28,4 +29,5 @@ export const ExecutorRegistry: RegistryType = {
   CLICK_ELEMENT: ClickElementExecutor,
   WAIT_FOR_ELEMENT: WaitForElementExecutor,
   DELIVER_VIA_WEBHOOK: DeliverViaWebhookExecutor,
+  LLM_DATA_EXTRACTION: LlmDataExtractionExecutor,
 };

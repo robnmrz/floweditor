@@ -1,5 +1,6 @@
 const ALG = "aes-256-cbc"; // key lenght 32 bytes
 import crypto from "crypto";
+import "server-only"; // prevent any part of this code to be exposed to the client
 
 export const symmetricEncrypt = (data: string) => {
   const key = process.env.ENCRYPTION_KEY;

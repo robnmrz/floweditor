@@ -9,50 +9,51 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { deleteWorkflow } from "@/server/workflows/deleteWorkflow";
+import { deleteCredentials } from "@/server/credentials/delete-credentials";
 import { useMutation } from "@tanstack/react-query";
+import { XIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
 interface Props {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  workflowName: string;
-  workflowId: string;
+  name: string;
 }
 
-function DeleteWorkflowDialog({
-  open,
-  setOpen,
-  workflowName,
-  workflowId,
-}: Props) {
+function DeleteCredentialsDialog({ name }: Props) {
+  const [open, setOpen] = useState(false);
   const [confirmText, setConfirmText] = useState("");
   const deleteMutation = useMutation({
-    mutationFn: deleteWorkflow,
+    mutationFn: deleteCredentials,
     onSuccess: () => {
-      toast.success("Workflow deleted successfully", { id: workflowId });
+      toast.success("Credentials deleted successfully", { id: name });
       setConfirmText("");
     },
     onError: () => {
-      toast.error("Failed to delete workflow", { id: workflowId });
+      toast.error("Failed to delete credentials", { id: name });
     },
   });
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger asChild>
+        <Button variant={"destructive"} size={"icon"}>
+          <XIcon size={18} />
+        </Button>
+      </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Are you sure you want to delete this workflow?
+            Are you sure you want to delete this credentials?
           </AlertDialogTitle>
           <AlertDialogDescription>
             If you delete this workflow you will not be able to recover it.
             <div className="flex flex-col py-4 gap-2">
               <p>
-                If you are sure, enter <b>{workflowName}</b> to confirm.
+                If you are sure, enter <b>{name}</b> to confirm.
               </p>
               <Input
                 value={confirmText}
@@ -66,11 +67,11 @@ function DeleteWorkflowDialog({
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            disabled={confirmText !== workflowName || deleteMutation.isPending}
+            disabled={confirmText !== name || deleteMutation.isPending}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             onClick={() => {
-              toast.loading("Deleting workflow...", { id: workflowId });
-              deleteMutation.mutate(workflowId);
+              toast.loading("Deleting credentials...", { id: name });
+              deleteMutation.mutate(name);
             }}
           >
             Delete
@@ -81,4 +82,4 @@ function DeleteWorkflowDialog({
   );
 }
 
-export default DeleteWorkflowDialog;
+export default DeleteCredentialsDialog;
