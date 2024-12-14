@@ -13,6 +13,7 @@ import { useState } from "react";
 import Logo from "./Logo";
 import { Button, buttonVariants } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import UserAvailableCreditsBadge from "./user-available-credits-badge";
 
 const routes = [
   {
@@ -53,7 +54,9 @@ function DesktopSidebar() {
       <div className="flex items-center justify-center gap-2 border-b-[1px] border-separate p-4">
         <Logo />
       </div>
-      <div className="p-2">TODO CREDITS</div>
+      <div className="p-2">
+        <UserAvailableCreditsBadge />
+      </div>
       <div className="flex flex-col p-2">
         {routes.map((route) => (
           <Link
@@ -97,6 +100,7 @@ export function MobileSidebar() {
             side={"left"}
           >
             <Logo />
+            <UserAvailableCreditsBadge />
             <div className="flex flex-col p-2">
               {routes.map((route) => (
                 <Link

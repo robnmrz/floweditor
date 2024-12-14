@@ -38,6 +38,7 @@ function CreateWorkflowDialog({ triggerText }: { triggerText?: string }) {
     mutationFn: createWorkflow,
     onSuccess: () => {
       toast.success("Workflow created", { id: "create-workflow" });
+      setOpen((prev) => !prev);
     },
     onError: () => {
       toast.error("Failed to create workflow", { id: "create-workflow" });
