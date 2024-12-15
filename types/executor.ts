@@ -16,7 +16,7 @@ export type Environment = {
 
 export type ExecutionEnvironment<T extends WorkflowTask> = {
   getInput(name: T["inputs"][number]["name"]): string;
-  setOuput(name: T["outputs"][number]["name"], value: string): void;
+  setOutput(name: T["outputs"][number]["name"], value: string): void;
   getBrowser(): Browser | undefined;
   setBrowser(browser: Browser): void;
   getPage(): Page | undefined;

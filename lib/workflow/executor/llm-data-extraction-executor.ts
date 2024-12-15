@@ -76,7 +76,7 @@ export async function LlmDataExtractionExecutor(
       return false;
     }
 
-    environment.setOuput("Extracted data", result);
+    environment.setOutput("Extracted data", result);
     return true;
   } catch (error: any) {
     environment.log.error(error.message);

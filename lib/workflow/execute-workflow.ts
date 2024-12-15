@@ -299,7 +299,7 @@ function createExecutionEnvironment(
 ): ExecutionEnvironment<any> {
   return {
     getInput: (name: string) => environment.phases[node.id]?.inputs[name],
-    setOuput: (name: string, value: string) => {
+    setOutput: (name: string, value: string) => {
       environment.phases[node.id].outputs[name] = value;
     },
     getBrowser: () => environment.browser,

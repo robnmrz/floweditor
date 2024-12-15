@@ -1,13 +1,17 @@
 import { ExecutionEnvironment } from "@/types/executor";
 import { TaskType } from "@/types/task";
 import { WorkflowTask } from "@/types/workflow";
+import { AddPropertyToJsonExecutor } from "./add-property-to-json-executor";
 import { ClickElementExecutor } from "./click-element-executor";
 import { DeliverViaWebhookExecutor } from "./deliver-via-webhook-executor";
 import { ExtractTextFromElementExecutor } from "./extract-text-from-element-executor";
 import { FillInputExecutor } from "./fill-input-executor";
 import { LaunchBrowserExecutor } from "./launch-browser-executor";
 import { LlmDataExtractionExecutor } from "./llm-data-extraction-executor";
+import { NavigateUrlExecutor } from "./navigate-page-executor";
 import { PageToHTMLExecutor } from "./page-to-html-executor";
+import { ReadPropertyFromJsonExecutor } from "./read-property-from-json-executor";
+import { ScrollToElementExecutor } from "./scroll-to-element-executor";
 import { WaitForElementExecutor } from "./wait-for-element-executor";
 
 type ExecutorFn<T extends WorkflowTask> = (
@@ -30,4 +34,8 @@ export const ExecutorRegistry: RegistryType = {
   WAIT_FOR_ELEMENT: WaitForElementExecutor,
   DELIVER_VIA_WEBHOOK: DeliverViaWebhookExecutor,
   LLM_DATA_EXTRACTION: LlmDataExtractionExecutor,
+  READ_PROPERTY_FROM_JSON: ReadPropertyFromJsonExecutor,
+  ADD_PROPERTY_TO_JSON: AddPropertyToJsonExecutor,
+  NAVIGATE_URL: NavigateUrlExecutor,
+  SCROLL_TO_ELEMENT: ScrollToElementExecutor,
 };
