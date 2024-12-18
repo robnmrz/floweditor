@@ -29,11 +29,13 @@ export async function getPeriods() {
   const periods: Period[] = [];
 
   for (let year = minYear; year <= currentYear; year++) {
-    for (let month = 0; month < 11; month++) {
+    for (let month = 0; month <= 11; month++) {
       periods.push({
         year: year,
         month: month,
       });
     }
   }
+
+  return periods;
 }
