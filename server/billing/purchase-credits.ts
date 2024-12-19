@@ -3,13 +3,13 @@
 import { getAppUrl } from "@/lib/helper/appUrl";
 import { stripe } from "@/lib/stripe/stripe";
 import { getCreditsPack, PackId } from "@/types/billing";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 export async function purchaseCredits(packId: PackId) {
-  const user = await currentUser();
+  const { userId } = await auth();
 
-  if (!user) {
+  if (!userId) {
     throw new Error("unauthenticated");
   }
 
@@ -26,7 +26,7 @@ export async function purchaseCredits(packId: PackId) {
     cancel_url: getAppUrl("billing"),
     metadata: {
       // this way stripe sends pack the metadata after a purchase so we can use it
-      userId: user.id,
+      userId: userId,
       packId: packId,
     },
     line_items: [

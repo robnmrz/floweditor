@@ -9,7 +9,7 @@ import {
 import { AppNode } from "@/types/appNode";
 import { TaskType } from "@/types/task";
 import { WorkflowStatus } from "@/types/workflow";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { Edge } from "@xyflow/react";
 import { redirect } from "next/navigation";
 
@@ -19,9 +19,9 @@ export async function createWorkflow(form: createWorkflowSchemaType) {
     throw new Error("Invalid form data");
   }
 
-  const user = await currentUser();
+  const { userId } = await auth();
 
-  if (!user) {
+  if (!userId) {
     throw new Error("unauthenticated");
   }
 
@@ -35,7 +35,7 @@ export async function createWorkflow(form: createWorkflowSchemaType) {
 
   const result = await prisma.workflow.create({
     data: {
-      userId: user.id,
+      userId: userId,
       status: WorkflowStatus.DRAFT,
       definition: JSON.stringify(initialWorkflow),
       ...data,

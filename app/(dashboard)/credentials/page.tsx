@@ -69,7 +69,7 @@ async function UserCredentials() {
   }
   return (
     <div className="flex flex-wrap gap-2">
-      {credentials.map((credential) => {
+      {credentials.map((credential: any) => {
         const createdAt = formatDistanceToNow(credential.createdAt, {
           addSuffix: true,
         });

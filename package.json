@@ -6,10 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prod": "npx prisma migrate deploy && node server.js"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.9.5",
+    "@clerk/nextjs": "^6.7.0",
     "@hookform/resolvers": "^3.9.1",
     "@prisma/client": "^5.22.0",
     "@radix-ui/react-accordion": "^1.2.1",
@@ -52,9 +53,10 @@
     "embla-carousel-react": "^8.5.1",
     "input-otp": "^1.4.1",
     "lucide-react": "^0.462.0",
-    "next": "^15.1.1",
+    "next": "^14.2.20",
     "next-themes": "^0.4.3",
     "nextjs-toploader": "^3.7.15",
+    "npm": "^11.0.0",
     "openai": "^4.76.3",
     "puppeteer": "^23.10.2",
     "react": "^18",

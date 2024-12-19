@@ -4,7 +4,7 @@ import { MousePointerClickIcon } from "lucide-react";
 
 export const ClickElementTask = {
   type: TaskType.CLICK_ELEMENT,
-  label: "Click element",
+  label: "Click Element",
   icon: (props) => (
     <MousePointerClickIcon {...props} className="stroke-orange-400" />
   ),

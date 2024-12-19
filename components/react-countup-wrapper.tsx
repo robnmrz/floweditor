@@ -7,7 +7,7 @@ function ReactCountWrapper({ value }: { value: number }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
-  });
+  }, [setMounted]);
 
   if (!mounted) {
     return "-";

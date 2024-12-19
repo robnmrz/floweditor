@@ -1,11 +1,12 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 
 export async function getWorkflowPhaseDetails(phaseId: string) {
-  const user = await currentUser();
-  if (!user) {
+  const { userId } = await auth();
+
+  if (!userId) {
     throw new Error("unauthenticated");
   }
 
@@ -16,7 +17,7 @@ export async function getWorkflowPhaseDetails(phaseId: string) {
       id: phaseId,
       // join
       execution: {
-        userId: user.id,
+        userId: userId,
       },
     },
     include: {

@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { WorkflowStatus } from "@/types/workflow";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 export async function updateWorkflow({
@@ -12,16 +12,16 @@ export async function updateWorkflow({
   id: string;
   definition: string;
 }) {
-  const user = await currentUser();
+  const { userId } = await auth();
 
-  if (!user) {
+  if (!userId) {
     throw new Error("unauthenticated");
   }
 
   const workflow = await prisma.workflow.findUnique({
     where: {
       id: id,
-      userId: user.id,
+      userId: userId,
     },
   });
 
@@ -37,7 +37,7 @@ export async function updateWorkflow({
   await prisma.workflow.update({
     where: {
       id: id,
-      userId: user.id,
+      userId: userId,
     },
     data: {
       definition: definition,

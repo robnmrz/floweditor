@@ -101,7 +101,7 @@ async function TransactionHistoryCard() {
             No transactions yet. You can make a purchase above.
           </p>
         )}
-        {purchases.map((purchase) => (
+        {purchases.map((purchase: any) => (
           <div
             key={purchase.id}
             className="flex justify-between items-center py-3 border-b last:border-b-0"

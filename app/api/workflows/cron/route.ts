@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { WorkflowStatus } from "@/types/workflow";
 
 export async function GET(req: Request) {
+  const headers = req.headers;
   const now = new Date();
   const workflows = await prisma.workflow.findMany({
     select: {

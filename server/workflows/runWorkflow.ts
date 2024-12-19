@@ -11,16 +11,16 @@ import {
   WorkflowExecutionTrigger,
   WorkflowStatus,
 } from "@/types/workflow";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 export async function runWorkflow(form: {
   workflowId: string;
   flowDefinition?: string;
 }) {
-  const user = await currentUser();
+  const { userId } = await auth();
 
-  if (!user) {
+  if (!userId) {
     throw new Error("unauthenticated");
   }
 
@@ -32,7 +32,7 @@ export async function runWorkflow(form: {
   const workflow = await prisma.workflow.findUnique({
     where: {
       id: workflowId,
-      userId: user.id,
+      userId: userId,
     },
   });
 
@@ -76,7 +76,7 @@ export async function runWorkflow(form: {
   const execution = await prisma.workflowExecution.create({
     data: {
       workflowId: workflowId,
-      userId: user.id,
+      userId: userId,
       status: WorkflowExecutionStatus.PENDING,
       startedAt: new Date(),
       trigger: WorkflowExecutionTrigger.MANUAL,
@@ -85,7 +85,7 @@ export async function runWorkflow(form: {
         create: executionPlan.flatMap((phase) => {
           return phase.nodes.flatMap((node) => {
             return {
-              userId: user.id,
+              userId: userId,
               status: ExecutionPhaseStatus.CREATED,
               number: phase.phase,
               node: JSON.stringify(node),
